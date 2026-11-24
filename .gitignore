@@ -1,0 +1,47 @@
+# build
+target/
+*.class
+*.log
+logs/
+
+# IDE / 本地工具
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.qoder/
+.claude/
+
+# secrets（保留 .env.example 作为模板）
+.env
+deploy/.env
+.env.*
+!.env.example
+
+# node / uni-app
+node_modules/
+dist/
+unpackage/
+
+# 微信开发者工具本地产物
+project.private.config.json
+
+# misc
+*.local
+*.bak
+*.orig
+*.rej
+*.tmp
+
+# 本地文档
+docs/
+
+# 演示物料
+demo/
+
+# 临时截图
+.tmp_shots/
+.tmp_demo/
+
+# workbuddy 工作空间
+.workbuddy/

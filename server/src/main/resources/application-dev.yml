@@ -1,0 +1,7 @@
+logging:
+  level:
+    com.lawyus.reservation: debug
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

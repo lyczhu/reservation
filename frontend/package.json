@@ -1,0 +1,22 @@
+{
+  "name": "reservation-frontend",
+  "private": true,
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "brand": "node ../brands/apply-brand.mjs",
+    "postinstall": "npm run brand",
+    "dev:user": "pnpm --filter @reservation/user dev:mp-weixin",
+    "dev:merchant": "pnpm --filter @reservation/merchant dev:mp-weixin",
+    "build:user": "pnpm --filter @reservation/user build:mp-weixin",
+    "build:merchant": "pnpm --filter @reservation/merchant build:mp-weixin"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^wd-(.*)": "@wot-ui/ui/components/wd-$1/wd-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "商家登录"
+      }
+    },
+    {
+      "path": "pages/dashboard/index",
+      "style": {
+        "navigationBarTitleText": "今日看板",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/reservation/list",
+      "style": {
+        "navigationBarTitleText": "预约管理"
+      }
+    },
+    {
+      "path": "pages/verify/index",
+      "style": {
+        "navigationBarTitleText": "到店核销"
+      }
+    },
+    {
+      "path": "pages/profile/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/reservation/detail",
+      "style": {
+        "navigationBarTitleText": "预约详情"
+      }
+    },
+    {
+      "path": "pages/reservation/reschedule",
+      "style": {
+        "navigationBarTitleText": "修改预约时间"
+      }
+    },
+    {
+      "path": "pages/reservation/proxy",
+      "style": {
+        "navigationBarTitleText": "代客预约"
+      }
+    },
+    {
+      "path": "pages/manage/services",
+      "style": {
+        "navigationBarTitleText": "服务管理"
+      }
+    },
+    {
+      "path": "pages/manage/service-edit",
+      "style": {
+        "navigationBarTitleText": "编辑服务"
+      }
+    },
+    {
+      "path": "pages/manage/categories",
+      "style": {
+        "navigationBarTitleText": "分类管理"
+      }
+    },
+    {
+      "path": "pages/manage/technicians",
+      "style": {
+        "navigationBarTitleText": "技师管理"
+      }
+    },
+    {
+      "path": "pages/manage/technician-shifts",
+      "style": {
+        "navigationBarTitleText": "排班设置"
+      }
+    },
+    {
+      "path": "pages/manage/store",
+      "style": {
+        "navigationBarTitleText": "门店资料"
+      }
+    },
+    {
+      "path": "pages/manage/rules",
+      "style": {
+        "navigationBarTitleText": "预约规则"
+      }
+    },
+    {
+      "path": "pages/manage/accounts",
+      "style": {
+        "navigationBarTitleText": "账号管理"
+      }
+    },
+    {
+      "path": "pages/manage/audits",
+      "style": {
+        "navigationBarTitleText": "操作审计"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#8C827C",
+    "selectedColor": "#C9707C",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/dashboard/index",
+        "text": "看板"
+      },
+      {
+        "pagePath": "pages/reservation/list",
+        "text": "预约"
+      },
+      {
+        "pagePath": "pages/verify/index",
+        "text": "核销"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTitleText": "预约商家端",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FAF6F2"
+  }
+}

@@ -1,0 +1,77 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: reservation-server
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:reservation}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:reservation}
+    password: ${MYSQL_PASSWORD:reservation}
+    hikari:
+      connection-init-sql: SET time_zone = '+08:00'
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 10MB
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+sa-token:
+  token-name: Authorization
+  token-prefix: Bearer
+  timeout: 604800
+  active-timeout: -1
+  is-concurrent: true
+  is-share: false
+  token-style: uuid
+  is-log: false
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+app:
+  security:
+    phone-aes-key: ${PHONE_AES_KEY:}
+    phone-hash-key: ${PHONE_HASH_KEY:}
+    verify-code-secret: ${VERIFY_CODE_SECRET:}
+  rustfs:
+    endpoint: ${RUSTFS_ENDPOINT:http://localhost:9000}
+    access-key: ${RUSTFS_ACCESS_KEY:rustfsadmin}
+    secret-key: ${RUSTFS_SECRET_KEY:rustfsadmin}
+    bucket: ${RUSTFS_BUCKET:reservation}
+    region: ${RUSTFS_REGION:us-east-1}
+  wx:
+    user:
+      app-id: ${WX_USER_APPID:}
+      app-secret: ${WX_USER_SECRET:}
+    staff:
+      app-id: ${WX_STAFF_APPID:}
+      app-secret: ${WX_STAFF_SECRET:}
+    subscribe:
+      success-template-id: ${WX_TPL_SUCCESS:}
+      change-template-id: ${WX_TPL_CHANGE:}
+      reminder-template-id: ${WX_TPL_REMINDER:}
+      new-reservation-template-id: ${WX_TPL_NEW_RESERVATION:}

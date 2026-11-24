@@ -1,0 +1,67 @@
+name: reservation
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: reservation-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123}
+      MYSQL_DATABASE: ${MYSQL_DB:-reservation}
+      MYSQL_USER: ${MYSQL_USER:-reservation}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-reservation}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci --default-time-zone=+08:00
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: reservation-redis
+    ports:
+      - "6379:6379"
+
+  rustfs:
+    # 对象存储（S3 兼容，路径式寻址 + 桶策略）
+    image: rustfs/rustfs:1.0.5
+    container_name: reservation-rustfs
+    command: server /data --console-enable --console-address ":9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:-rustfsadmin}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:-rustfsadmin}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - rustfs-data:/data
+
+  server:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: reservation-server
+    env_file:
+      - .env
+    environment:
+      MYSQL_HOST: mysql
+      REDIS_HOST: redis
+      # 仅作为缺省值：生产在 .env 中设置公网 RUSTFS_ENDPOINT 覆盖，供小程序直接加载图片
+      RUSTFS_ENDPOINT: ${RUSTFS_ENDPOINT:-http://rustfs:9000}
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      rustfs:
+        condition: service_started
+
+volumes:
+  mysql-data:
+  rustfs-data:
